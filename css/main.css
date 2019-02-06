@@ -1,3 +1,19 @@
+
 html {
     scroll-behavior: smooth;
     }
+
+
+#container
+    {
+        margin: 5px;
+    }
+
+label
+    {
+        font-weight: bold;
+        font-size: 2em;
+    }
+
+
+              
