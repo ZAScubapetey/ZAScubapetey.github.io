@@ -51,7 +51,7 @@
 
                 document.getElementById('poster').src = posterURL;
                 document.getElementById('movieTitle').innerHTML = "<h1>" + title + " [" + rating + "]</h1>";
-                document.getElementById('cardTitle').innerHTML = "<h1>" + title + " [" + rating + "]</h1>";
+
                 document.getElementById('movieYear').innerHTML = "<h3>" + year + "</h3>";
                 document.getElementById('movieActors').innerHTML = "<p>" + actors + "</p>";
                 document.getElementById('moviePlot').innerHTML = "<p>" + plot + "</p>";
@@ -67,29 +67,29 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-        <div id="Top" class="jumbotron jumbotron-fluid" style="margin-bottom:0">
-          <h1 class="text-center">Movie OMDB Finder</h1>
-        </div>
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top p-1" style="margin-bottom:1">
-          <a class="navbar-brand" href="#Top">Home</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <div id="Top" class="jumbotron jumbotron-fluid" style="margin-bottom:0">
+        <h1 class="text-center">Movie OMDB Finder</h1>
+    </div>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top p-1" style="margin-bottom:1">
+        <a class="navbar-brand" href="#Top">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
-          </button>
-          <!-- Navbar links -->
-          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        </button>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/index.html#AboutMe">About Me</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/index.htmlPortfolio">Portfolio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/index.html#Links">Social Links</a>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/index.html#AboutMe">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/index.htmlPortfolio">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/index.html#Links">Social Links</a>
+                </li>
             </ul>
-          </div>
-        </nav>
+        </div>
+    </nav>
     <div id="container" class="container-fluid">
         <label for="title">Movie OMDB Finder</label>
         <div class="row">
@@ -99,11 +99,9 @@
         <div class="invisible" id="results">
             <div class="card " style="float: right">
                 <div class="card-body">
-                    <h4 class="card-title">
-                        <div id="cardTitle"></div>
-                    </h4>
+
+                    <div><img id="poster"></div>
                 </div>
-                <div><img class="card-img-bottom" id="poster"></div>
             </div>
             <div class="row ">
                 <div class="col-sm-4">
