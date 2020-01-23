@@ -5,16 +5,14 @@
     <title>Nohire Api Test</title>
     <meta charset="UTF-8">
     <meta name="API" content="Nohire Api Test">
-    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+   
 
     <script>
         var xmlhttp;
@@ -31,13 +29,15 @@
 
         async function systemLogin(e) {
             var apiNumber = $("#apiNumber").val();
+            var apiUsername = $("#apiUsername").val();
+            var apiPassword = $("#apiPassword").val();
             var result = await $.ajax({
                 url: "https://nohire.dev.nohire.co.za/sec_api_Login/",
                 type: "GET",
                 data: {
                     "system_token": apiNumber,
-                    "username": "nohireAdminUser",
-                    "password": "n0h1r3Adm1nUs3r",
+                    "username": apiUsername,
+                    "password": apiPassword,
                 }
             });
 
@@ -78,10 +78,16 @@
     </br>
     <div id="container" class="container-fluid">
         <div class="row">
-            <div class="" style="border: 10px;"><input type="text" id="apiNumber" value="API" /></div>
-            <div class=""><input type="text" id="idNumber" value="8604275018084" /></div>
-            <div class="col-sm-3"><button id="btnSearch" class="btn btn-primary">Get Results</button></div>
+            <div class="" style="border: 10px;"><input type="text" id="apiUsername" value="Username" /></div>
+            <div class=""><input type="text" id="apiPassword" value="password" /></div>
         </div>
+        <div class="row">
+            <div class="" style="border: 10px;"><input type="text" id="apiNumber" value="API" /></div>
+            <div class=""><input type="text" id="idNumber" value="Id Number" /></div>
+
+        </div>
+        </br>
+        <div class="col-sm-3"><button id="btnSearch" class="btn btn-primary">Get Results</button></div>
         </br>
         <div class="invisible" id="results">
             <div class="row">
