@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Movie look up</title>
+    <meta charset="UTF-8">
+    <meta name="Portfolio" content="My first java script website">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/index.html#Portfolio://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
+
+    <script>
+        var xmlhttp;
+        var sessionToken;
+        window.onload = function () {
+            document.getElementById('btnLogin').addEventListener('click', systemLogin, false);
+            document.getElementById('btnSearch').addEventListener('click', searchFunc, false);
+        }
+
+        function systemLogin(e) {
+
+
+            var urlLogin =
+                "https://nohire.dev.nohire.co.za/sec_api_Login/?system_token=123&username=nohireAdminUser&password=n0h1r3Adm1nUs3r";
+            //console.log(url);
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = processDataLogin;
+            xmlhttp.open("GET", urlLogin, true);
+            xmlhttp.send();
+            $("#results").removeClass("invisible");
+
+        }
+
+        function searchFunc(e) {
+            console.log("searchFunc");
+            var idNumber = document.getElementById('idNumber').value;
+            var urlSearch = "https://nohire.dev.nohire.co.za/search_api/?session_token=" + sessionToken + "&id_number="+idNumber+"&id_number_type=1";
+            console.log(urlSearch);
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = processDataSearch;
+            xmlhttp.open("GET", urlSearch, true);
+            xmlhttp.send();
+            $("#searchResults").removeClass("invisible");
+
+        }
+
+        function processDataLogin() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                var systemJSON = xmlhttp.responseText;
+                systemJSON = JSON.parse(systemJSON);
+                sessionToken = systemJSON.session_token;
+
+                document.getElementById('token').innerHTML = JSON.stringify(systemJSON, null, 4);
+
+            }
+        }
+
+        function processDataSearch() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                var systemJSON = xmlhttp.responseText;
+                systemJSON = JSON.parse(systemJSON);
+                matchId = systemJSON.match;
+                ticketCount = systemJSON.ticket_count
+                //document.getElementById('matchTrue').innerHTML = matchId;
+                //document.getElementById('ticketNumber').innerHTML = ticketCount;
+                document.getElementById('request-result').innerHTML = JSON.stringify(systemJSON, null, 4);
+
+            }
+        }
+    </script>
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div id="Top" class="jumbotron jumbotron-fluid" style="margin-bottom:0">
+        <h1 class="text-center">Nohire Test</h1>
+    </div>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top p-1" style="margin-bottom:1">
+        <a class="navbar-brand" href="/index.html">Back</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="container" class="container-fluid">
+        <label for="title">Nohire Test</label>
+        <div class="row">
+            <div class=""><input type="text" id="idNumber" value="8604275018084"/></div>
+            <div class="col-sm-3"><button id="btnLogin" class="btn btn-primary">Get Session Token</button></div>
+            <div class="col-sm-3"><button id="btnSearch" class="btn btn-primary">Get Results</button></div>
+        </div>
+        <div class="invisible" id="results">
+            <div class="row">
+                <div class="col-sm-12">
+                    <textarea id="token" style="width:50%;height:400px"></textarea>
+                </div>
+            </div>
+        </div>
+            <div class="invisible" id="searchResults">
+            <div class="row">
+                <div class="col-sm-12">
+                    <textarea id="request-result" style="width:50%;height:400px"></textarea>
+                    <div id="matchTrue"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="ticketNumber"></div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- container -->
+</body>
+
+</html>
