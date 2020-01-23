@@ -21,13 +21,19 @@
         var xmlhttp;
         var sessionToken;
         window.onload = function () {
-            document.getElementById('btnLogin').addEventListener('click', systemLogin, false);
-            document.getElementById('btnSearch').addEventListener('click', searchFunc, false);
+            //document.getElementById('btnLogin').addEventListener('click', systemLogin, false);
+            document.getElementById('btnSearch').addEventListener('click', executeSearch, false);
         }
 
-        function systemLogin(e) {
+        async function executeSearch(){
+            // login
+            await systemLogin();
+            await searchFunc();
+        }
 
+        async function systemLogin(e) {
 
+            /*
             var urlLogin =
                 "https://nohire.dev.nohire.co.za/sec_api_Login/?system_token=123&username=nohireAdminUser&password=n0h1r3Adm1nUs3r";
             //console.log(url);
@@ -36,11 +42,30 @@
             xmlhttp.open("GET", urlLogin, true);
             xmlhttp.send();
             $("#results").removeClass("invisible");
+            */
 
+            var result = await $.ajax({
+                url: "https://nohire.dev.nohire.co.za/sec_api_Login/",
+                type:"GET",
+                data: {
+                    "system_token": "123",
+                    "username": "nohireAdminUser",
+                    "password": "n0h1r3Adm1nUs3r",
+                }
+            });
+
+            sessionToken = result.session_token;
+
+            var display_result = JSON.stringify(result, null, 4);
+            $('#token').val(display_result);
+            $("#results").removeClass("invisible");
         }
 
-        function searchFunc(e) {
+        async function searchFunc(e) {
+
+
             console.log("searchFunc");
+            /*
             var idNumber = document.getElementById('idNumber').value;
             var urlSearch = "https://nohire.dev.nohire.co.za/search_api/?session_token=" + sessionToken + "&id_number="+idNumber+"&id_number_type=1";
             console.log(urlSearch);
@@ -49,9 +74,24 @@
             xmlhttp.open("GET", urlSearch, true);
             xmlhttp.send();
             $("#searchResults").removeClass("invisible");
+            */
 
+            var idNumber = $("#idNumber").val();
+            var result = await $.ajax({
+                url: "https://nohire.dev.nohire.co.za/search_api/",
+                type:"GET",
+                data: {
+                    "session_token": sessionToken,
+                    "id_number": idNumber,
+                    "id_number_type": "1",
+                }
+            });
+
+            var display_result = JSON.stringify(result, null, 4);
+            $('#request-result').val(display_result);
+            $("#searchResults").removeClass("invisible");
         }
-
+/*
         function processDataLogin() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
@@ -63,20 +103,7 @@
 
             }
         }
-
-        function processDataSearch() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-                var systemJSON = xmlhttp.responseText;
-                systemJSON = JSON.parse(systemJSON);
-                matchId = systemJSON.match;
-                ticketCount = systemJSON.ticket_count
-                //document.getElementById('matchTrue').innerHTML = matchId;
-                //document.getElementById('ticketNumber').innerHTML = ticketCount;
-                document.getElementById('request-result').innerHTML = JSON.stringify(systemJSON, null, 4);
-
-            }
-        }
+*/
     </script>
 
 </head>
@@ -109,7 +136,7 @@
         <div class="invisible" id="results">
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea id="token" style="width:50%;height:400px"></textarea>
+                    <textarea id="token" style="width:50%;height:200px"></textarea>
                 </div>
             </div>
         </div>
