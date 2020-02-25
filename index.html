@@ -24,7 +24,7 @@
         async function executeSearch() {
             // login
             await systemLogin();
-            //  await searchFunc();
+            await searchFunc();
         }
 
         async function systemLogin(e) {
@@ -41,19 +41,25 @@
             //basic_auth.password = apiPassword
 
             // console.log(basic_auth);
-
-
-
+            var proxy = 'https://cors-anywhere.herokuapp.com/';
+            var myUrl = "https://nohire.dev.nohire.co.za/api_login/";
             var result = await $.ajax({
-                url: "https://nohire.dev.nohire.co.za/api_login/",
+
+                url: proxy + myUrl,
                 type: "GET",
-                data: {
-                    "-H":{
-                        "Authorization": "Basic QXBpVGVzdDpBcDFUM3N0MjAyMA==",
-                        "CLIENT-TOKEN": "ba25d511b0d729c068982884519d3a286f7a38ed419a02d52488272bc87dbc7e33e4ac7ce489d212ea75fa4cf51b784301a2235a2be73cd5b4e8ff8166a4659540c974bbd189841c9d41c497715c28ad3e36a2e146178b102576650446fe1e50177fc3baca92089ec02ecc8803edebdcfe14837d13a2a1a084b3725e27c9afae"
-                    },
-                }
-            });
+                timeout: 0,
+                headers: {
+
+                    "accept": " application/json",
+                    "Authorization": "Basic cm9vdFVzZXI6cjAwdFVzM3I=",
+                    "CLIENT-TOKEN": "ba25d511b0d729c068982884519d3a286f7a38ed419a02d52488272bc87dbc7e33e4ac7ce489d212ea75fa4cf51b784301a2235a2be73cd5b4e8ff8166a4659540c974bbd189841c9d41c497715c28ad3e36a2e146178b102576650446fe1e50177fc3baca92089ec02ecc8803edebdcfe14837d13a2a1a084b3725e27c9afae",
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify({
+                    query: "",
+                    variables: {}
+                })
+            })
             console.log(result);
             sessionToken = result.jwt;
             console.log(sessionToken);
@@ -68,11 +74,18 @@
             console.log("searchFunc");
 
             var idNumber = $("#idNumber").val();
+            var proxy = 'https://cors-anywhere.herokuapp.com/';
+            var myUrl = "https://nohire.dev.nohire.co.za/api_search_ticket/";
+            console.log(idNumber);
             var result = await $.ajax({
-                url: "https://nohire.dev.nohire.co.za/api_search_ticket/",
+                url: proxy + myUrl,
                 type: "GET",
+                headers: {
+                    "accept": " application/json",
+                    "Authorization": "Bearer " +sessionToken,
+                    "Content-Type": "application/json"
+                },
                 data: {
-                    "session_token": sessionToken,
                     "id_number": idNumber,
                     "id_number_type": "1",
                 }
