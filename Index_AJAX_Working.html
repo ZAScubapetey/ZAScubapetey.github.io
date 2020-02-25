@@ -29,21 +29,9 @@
 
         async function systemLogin(e) {
             console.log("searchFunc");
-
             var apiNumber = $("#apiNumber").val();
             var apiUsername = $("#apiUsername").val();
             var apiPassword = $("#apiPassword").val();
-            var NohireApi = require('nohire_api');
-            var defaultClient = NohireApi.ApiClient.instance;
-            // Configure HTTP basic authorization: basic_auth
-            var basic_auth = defaultClient.authentications['basic_auth'];
-            basic_auth.username = apiUsername
-            basic_auth.password = apiPassword
-
-            console.log(basic_auth);
-
-
-
             var result = await $.ajax({
                 url: "https://nohire.dev.nohire.co.za/sec_api_Login/",
                 type: "GET",
@@ -90,13 +78,6 @@
     </div>
     </br>
     <div id="container" class="container-fluid">
-       
-        <div class="row">
-            <div class="" style="border: 10px;"><input type="text" id="nohire_api" value="https://nohire.dev.nohire.co.za/" /></div>
-        
-        </div>
-        
-       
         <div class="row">
             <div class="" style="border: 10px;"><input type="text" id="apiUsername" value="ApiTest" /></div>
             <div class=""><input type="text" id="apiPassword" value="Ap1T3st2020" /></div>
