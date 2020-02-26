@@ -28,7 +28,7 @@
         }
 
         async function systemLogin(e) {
-            console.log("searchFunc");
+            console.log("searchLogin");
 
             var apiNumber = $("#apiNumber").val();
             var apiUsername = $("#apiUsername").val();
@@ -79,16 +79,17 @@
             console.log(idNumber);
             var result = await $.ajax({
                 url: proxy + myUrl,
-                type: "GET",
+                type: "POST",
                 headers: {
                     "accept": " application/json",
-                    "Authorization": "Bearer " +sessionToken,
+                    "Authorization": "Bearer " + sessionToken,
                     "Content-Type": "application/json"
                 },
-                data: {
-                    "id_number": idNumber,
+                data: JSON.stringify({
+                    "id_number": "8604275018084",
                     "id_number_type": "1",
-                }
+                }),
+
             });
 
             var display_result = JSON.stringify(result, null, 4);
