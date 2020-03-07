@@ -81,6 +81,7 @@
             var specUrl = "api_search_ticket/";
             console.log(idNumber);
             var result = await $.ajax({
+<<<<<<< HEAD
                 url: proxy + apiURL + specUrl,
                 type: "POST",
                 headers: {
@@ -95,6 +96,20 @@
                     "contact_phone_number": "",
                     "vehicle_registration_number": ""
                 })
+=======
+                url: proxy + myUrl,
+                type: "POST",
+                headers: {
+                    "accept": " application/json",
+                    "Authorization": "Bearer " + sessionToken,
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify({
+                    "id_number": "8604275018084",
+                    "id_number_type": "1",
+                }),
+
+>>>>>>> 2bcad85e331c6359f84faeb46d5fed3b57043116
             });
 
             var display_result = JSON.stringify(result, null, 4);
