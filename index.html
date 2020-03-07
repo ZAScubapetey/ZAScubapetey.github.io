@@ -33,6 +33,7 @@
             var apiNumber = $("#apiNumber").val();
             var apiUsername = $("#apiUsername").val();
             var apiPassword = $("#apiPassword").val();
+            var apiURL = $("#nohireServer").val();
             //var NohireApi = require('nohire_api');
             //var defaultClient = NohireApi.ApiClient.instance;
             // Configure HTTP basic authorization: basic_auth
@@ -43,9 +44,10 @@
             // console.log(basic_auth);
             var proxy = 'https://cors-anywhere.herokuapp.com/';
             var myUrl = "https://nohire.dev.nohire.co.za/api_login/";
+            var specUrl = "api_login/";
             var result = await $.ajax({
 
-                url: proxy + myUrl,
+                url: proxy + apiURL + specUrl,
                 type: "GET",
                 timeout: 0,
                 headers: {
@@ -72,23 +74,27 @@
 
 
             console.log("searchFunc");
-
+            var apiURL = $("#nohireServer").val();
             var idNumber = $("#idNumber").val();
             var proxy = 'https://cors-anywhere.herokuapp.com/';
             var myUrl = "https://nohire.dev.nohire.co.za/api_search_ticket/";
+            var specUrl = "api_search_ticket/";
             console.log(idNumber);
             var result = await $.ajax({
-                url: proxy + myUrl,
-                type: "GET",
+                url: proxy + apiURL + specUrl,
+                type: "POST",
                 headers: {
                     "accept": " application/json",
-                    "Authorization": "Bearer " +sessionToken,
-                    "Content-Type": "application/json"
+                    "Authorization": " Bearer " + sessionToken,
+                    "Content-Type": " application/json"
                 },
-                data: {
+                data: JSON.stringify({
                     "id_number": idNumber,
                     "id_number_type": "1",
-                }
+                    "company_name": "",
+                    "contact_phone_number": "",
+                    "vehicle_registration_number": ""
+                })
             });
 
             var display_result = JSON.stringify(result, null, 4);
