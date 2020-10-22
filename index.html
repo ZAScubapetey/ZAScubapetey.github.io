@@ -82,9 +82,10 @@
       var START = document.getElementById("shareStart");
       var END = document.getElementById("shareEnd");
       var PERIOD = document.getElementById("period");
-      document.getElementById("annualGrowtH").value = Math.round((Math.pow((END.value / START.value), 1 / PERIOD.value) - 1) * 100);
+            document.getElementById("annualGrowtH").value = Math.round((Math.pow((END.value / START.value), 1 / PERIOD.value) - 1) * 100);
       document.getElementById("growthPa").value = Math.round((Math.pow((END.value / START.value), 1 / PERIOD.value) - 1) * 100);
       document.getElementById("totalGrowtH").value = Math.round((END.value-START.value)/START.value*100);
+
     }
 
     function totalGrowth() {
@@ -93,8 +94,10 @@
       var INFLATIONPA = document.getElementById("inflationhPa");
       var AMOUNT = document.getElementById("investedAmount");
       var Sums = Math.pow((1 + GROWTHPA.value / 100 - INFLATIONPA.value / 100), LEFT.value);
+      var TRUEVALUE = Math.round(AMOUNT.value * Sums);
       document.getElementById("valueInvestment").value = Math.round(AMOUNT.value * Sums);
-
+      document.getElementById("trueValue").value =  Math.round(AMOUNT.value * Math.pow((1+GROWTHPA.value/100),LEFT.value));
+      document.getElementById("trueInvest").value =  Math.round(AMOUNT.value * Math.pow((1+GROWTHPA.value/100),LEFT.value)/Sums);
     }
   </script>
 </head>
@@ -270,8 +273,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-xl-4"></div>
-            <div class="col-12 col-xl-4">
+                        <div class="col-12 col-xl-4">
               <div class="card card-body bg-white border-light shadow-sm mb-4">
                 <h2 class="h5 mb-4">Results should conditions continue</h2>
                 <form>
@@ -293,6 +295,44 @@
               </div>
             </div>
             <div class="col-12 col-xl-4">
+              <div class="card card-body bg-white border-light shadow-sm mb-4">
+                <h2 class="h5 mb-4">True value of investment adjusted for inflation</h2>
+                <form>
+                  <div class="row">
+                    <div class="">
+                      <label for="true_Value">The real value of you invested amount if you factor in inflation for the period</label>
+                      <!--   <button type="submit" class="btn btn-primary">Calculate</button>-->
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div>
+                        <label for="true_Value"></label>
+                        <input class="form-control" id="trueValue" type="number" placeholder="0"
+                          onfocusout="totalGrowth()">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-12 col-xl-4">
+              <div class="card card-body bg-white border-light shadow-sm mb-4">
+                <h2 class="h5 mb-4">Investment amount adjusted for Inflation</h2>
+                <form>
+                  <div class="row">
+                    <div class="">
+                      <label for="true_investment">Amount you should invest to have the same value as current and the result</label>
+                      <!--   <button type="submit" class="btn btn-primary">Calculate</button>-->
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div>
+                        <label for="true_investment"></label>
+                        <input class="form-control" id="trueInvest" type="number" placeholder="0"
+                          onfocusout="totalGrowth()">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
             <footer class="footer section py-5">
               <div class="row">
