@@ -84,6 +84,7 @@
       var PERIOD = document.getElementById("period");
       document.getElementById("annualGrowtH").value = Math.round((Math.pow((END.value / START.value), 1 / PERIOD.value) - 1) * 100);
       document.getElementById("growthPa").value = Math.round((Math.pow((END.value / START.value), 1 / PERIOD.value) - 1) * 100);
+      document.getElementById("totalGrowtH").value = Math.round((END.value-START.value)/START.value*100);
     }
 
     function totalGrowth() {
@@ -216,11 +217,19 @@
                       </div>
                     </div>
                   </div>
+                  <div class="row">
                   <div class="col-md-6 mb-3">
                     <div>
                       <label for="annual_growth">Annual Growth Rate (%)</label>
                       <input class="form-control" id="annualGrowtH" type="number" value="22">
                     </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div>
+                      <label for="total_growth">Total Growth (%)</label>
+                      <input class="form-control" id="totalGrowtH" type="number" value="640">
+                    </div>
+                  </div>
                   </div>
                 </form>
               </div>
